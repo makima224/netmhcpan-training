@@ -1,8 +1,10 @@
-FROM python: 3.12-slim 
+FROM python:3.12-slim 
 #version slim adapté pour linux
 
-RUN apt-get update && apt-get install -y \ 
+#  "\" doit être le dernier caractère en Docker pas d'espace ou de tabulation
+RUN apt-get update && apt-get install -y \
 
+# Installer dépendances nécessaires à NetMHCpan:
 #NetMHCpan utilise des scripts en tcsh
 tcsh\
 
@@ -15,16 +17,27 @@ perl\
 #reduis l'image et vide le cache d'installation
 rm -rf /var/lib/apt/lists/* 
 
-#dossier de travail
-WORKDIR /app  
 
-RUN pip install --no-cache-dir biopython
+# Dossier de travail
+WORKDIR /app
 
-COPY mhc.py
+# Copier NetMHCpan (Class I uniquement)
+COPY netMHCpan-4.2 /opt/netMHCpan-4.2
 
-COPY /netMHCpan-4.2 &&\
-     /netMHCIIpan-4.3
+# Variable attendue par DTU
+ENV NETMHCpan=/opt/netMHCpan-4.2
 
-RUN chmod 111 /netMHCpan-4.2 &&\
-              /netMHCIIpan-4.3
+# Ajouter les binaires au PATH (ARM64 pour Mac M1/M2)
+ENV PATH="/opt/netMHCpan-4.2/Linux_arm64/bin:${PATH}"
+
+# Fix permissions
+RUN chmod +x /opt/netMHCpan-4.2/Linux_arm64/bin/netMHCpan-4.2
+
+# TMPDIR (évite erreurs tmp)
+ENV TMPDIR=/tmp
+RUN mkdir -p /tmp && chmod 1777 /tmp
+
+# Copier le script
+COPY mhc.py .
+
 

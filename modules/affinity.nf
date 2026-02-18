@@ -1,11 +1,15 @@
 process Affinity {
-    container "cmh_env"
 
-    input: path files
+    container 'mhc-class1'
 
-    output: path "/results/*.txt"
+    input:
+    path f6
 
-    script: 
-    """ python /app/mhc.py ${files[0]} ${files[1]} results 
+    output:
+    path "results/*.txt"
+
+    script:
+    """
+    python mhc.py ${f6} results
     """
 }

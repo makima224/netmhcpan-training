@@ -1,26 +1,27 @@
 alleles_1=[
     "HLA-A23:01",
-    "HLA-A*30:02",
-    "HLA-A*68:02",
 
     "HLA-B*53:01",
-    "HLA-B*15:03",
-    "HLA-B*42:01",
 
-    "HLA-C*04:01",
-    "HLA-C*17:01"
+    "HLA-C*04:01"
 ]
 
 
-alleles_2=[
-   "DRB1_1302",
-   "DRB1_1304",
-   
-#les hétérodimères complets sont exigés pour DP et DQ
-   "HLA-DPA10103-DPB10101",
 
-   "HLA-DPA10103-DPB10402",
+import sys, os, subprocess
 
-   "HLA-DQA10101-DQB10501"
-]
+def run_machine(f6,outdir="results"):
+   os.makedirs(outdir,exist_ok=True)
+
+   with open (out_file,"mhc_outfile",'w') as out
+   subprocess.run 
+   ( ["netMHCpan-4.2",
+      "-f",f6,
+      "-a",alleles_1,
+      "-l",9] ,
+
+   stdout=out,stderr=subprocess.PIPE, check=True
+   ) 
+  
+
 
