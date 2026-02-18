@@ -19,7 +19,7 @@ output_file = os.path.join("results", "mhc_outfile.txt")
 alleles_list = ",".join(alleles_1)
 
 subprocess.run(
-    ["netMHCpan-4.2", "-f", fasta_file, "-a", alleles_list, "-l", "9"],
+    ["netMHCpan", "-f", fasta_file, "-a", alleles_list, "-l", "9"],
     stdout=open(output_file, "w"),
     stderr=subprocess.PIPE,
     check=True
