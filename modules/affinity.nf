@@ -10,6 +10,6 @@ process Affinity {
 
     script:
     """
-    python mhc.py ${f6} results
+    python mhc.py ${f6}
     """
 }

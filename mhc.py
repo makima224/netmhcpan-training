@@ -1,27 +1,29 @@
-alleles_1=[
+import os
+import subprocess
+
+alleles_1 = [
     "HLA-A23:01",
-
     "HLA-B*53:01",
-
     "HLA-C*04:01"
 ]
 
+fasta_file = input("➡️give the file u wanna treat with HLA-A23:01,HLA-B*53:01 and HLA-C*04:01")
 
+if not os.path.isfile(fasta_file):
+    print("❌ Fichier introuvable. Assurez-vous que le chemin est correct.")
+    exit(1)
 
-import sys, os, subprocess
+os.makedirs("results", exist_ok=True)
+output_file = os.path.join("results", "mhc_outfile.txt")
 
-def run_machine(f6,outdir="results"):
-   os.makedirs(outdir,exist_ok=True)
+alleles_list = ",".join(alleles_1)
 
-   with open (out_file,"mhc_outfile",'w') as out
-   subprocess.run 
-   ( ["netMHCpan-4.2",
-      "-f",f6,
-      "-a",alleles_1,
-      "-l",9] ,
+subprocess.run(
+    ["netMHCpan-4.2", "-f", fasta_file, "-a", alleles_list, "-l", "9"],
+    stdout=open(output_file, "w"),
+    stderr=subprocess.PIPE,
+    check=True
+)
 
-   stdout=out,stderr=subprocess.PIPE, check=True
-   ) 
-  
-
+print(f"✅ treatment successfully finished u can find it in  {output_file}")
 
