@@ -20,7 +20,7 @@ docker build --no-cache -t mhc-class1 .
 This image includes all dependencies such as tcsh, gawk, perl, and Python packages (biopython, pandas, numpy).
 
 ⚡ Install Nextflow Locally
-# Download and install Nextflow
+# Download and install Nextflow ```
 curl -s https://get.nextflow.io | bash
 
 chmod +x nextflow
